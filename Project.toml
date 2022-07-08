@@ -1,0 +1,4 @@
+name = "NeuronSplitting"
+uuid = "6e1638f1-6dc4-43f6-a5d3-61d6c99ac9bf"
+authors = ["Mark Transtrum <mktranstrum@byu.edu>"]
+version = "0.1.0"
