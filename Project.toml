@@ -2,3 +2,10 @@ name = "NeuronSplitting"
 uuid = "6e1638f1-6dc4-43f6-a5d3-61d6c99ac9bf"
 authors = ["Mark Transtrum <mktranstrum@byu.edu>"]
 version = "0.1.0"
+
+[deps]
+Flux = "587475ba-b771-5e3f-ad9e-33799f191a9c"
+ForwardDiff = "f6369f11-7733-5829-9624-2563aa707210"
+IJulia = "7073ff75-c697-5162-941a-fcdaad2a7d2a"
+Optim = "429524aa-4258-5aef-a3af-852621145aeb"
+PyPlot = "d330b81b-6aea-500a-939a-2ce795aea3ee"

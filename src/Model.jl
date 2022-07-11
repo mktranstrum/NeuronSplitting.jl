@@ -1,6 +1,6 @@
 module Model
 
-export λ, Nh, fhat, loss, train, optimal_split, line_search
+export λ, Nh, fhat, loss, train, optimal_split, line_search, target_split
 
 using LinearAlgebra
 using Main.Data
@@ -71,13 +71,26 @@ function optimal_split(θ0)
             @info "Neuron $i is new optimal"
             max_score = score
             θ_next .= θ
+            dθ .= 0
             dθ[hessian_indices] .= e.vectors[:, argmin(e.values)] ./ sqrt( abs(score))
         end
     end
     return max_score, θ_next, dθ
 end
             
-function line_search(θ, dθ, τs = range(0,1,101))
+function target_split(θ0, i)
+    nh = Nh(θ0)
+    θ = split(θ0, i)
+    dθ = zero(θ)
+    hessian_indices = [indices(i, nh+1); indices(nh+1, nh+1)]
+    h = hessian(θ -> loss(θ,0), θ)[hessian_indices, hessian_indices]
+    e = eigen(h)
+    score = -minimum(e.values)
+    dθ[hessian_indices] .= e.vectors[:, argmin(e.values)] ./ sqrt( abs(score))
+    return -minimum(e.values), θ, dθ
+end
+
+function line_search(θ, dθ, τs = range(0,2,1001))
     losses = [loss(θ + dθ*τ) for τ in τs]
     @info "Minimum loss in linear search: $(minimum(losses))"
     return τs[argmin(losses)]

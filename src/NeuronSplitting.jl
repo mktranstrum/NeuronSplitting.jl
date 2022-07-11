@@ -12,8 +12,6 @@ using Main.Model
 
 figure()
 plot_data()
-
-
 seed!(1985)
 # Start with a single neuron
 θ0 = randn(3*1 + 1)* 1e0
